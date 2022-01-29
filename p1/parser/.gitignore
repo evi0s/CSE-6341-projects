@@ -1,0 +1,10 @@
+
+# bytecodes
+*.class
+
+# generated java file
+Parser.java
+
+# generated other files
+Lexer*
+sym*

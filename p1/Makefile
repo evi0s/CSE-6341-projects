@@ -1,5 +1,5 @@
 
-SOURCES = $(wildcard */*.java)
+SOURCES = $(wildcard */*.java */*/*.java)
 CLASSES = $(SOURCES:.java=.class) parser/Lexer.class parser/sym.class parser/Parser.class 
 
 default: parser/Lexer.java parser/Parser.java $(CLASSES)
