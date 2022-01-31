@@ -1,6 +1,7 @@
 package ast;
 
 import java.io.PrintStream;
+import java.util.Map;
 
 public class UnitList extends ASTNode {
     public final Unit unit;
@@ -23,5 +24,13 @@ public class UnitList extends ASTNode {
         ps.println();
         if (unitList != null)
             unitList.print(ps);
+    }
+
+    @Override
+    public void check(Map<String, Type> identTable) {
+        this.unit.check(identTable);
+        if (this.unitList != null) {
+            this.unitList.check(identTable);
+        }
     }
 }

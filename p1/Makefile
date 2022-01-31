@@ -15,5 +15,5 @@ parser/Parser.java: parser/Parser.cup
 	javac -cp $(CUP_DIR)/java-cup-11b.jar:. $<
 
 clean:
-	rm -f */*.class parser/Lexer.java parser/sym.java parser/Parser.java */*~
+	rm -f */*.class */*/*.class parser/Lexer.java parser/sym.java parser/Parser.java */*~
 

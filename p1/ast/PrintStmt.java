@@ -1,6 +1,7 @@
 package ast;
 
 import java.io.PrintStream;
+import java.util.Map;
 
 public class PrintStmt extends Stmt {
     public final Expr expr;
@@ -14,5 +15,10 @@ public class PrintStmt extends Stmt {
         ps.print("print ");
         expr.print(ps);
         ps.print(";");
+    }
+
+    @Override
+    public void check(Map<String, Type> identTable) {
+        this.expr.check(identTable);
     }
 }
