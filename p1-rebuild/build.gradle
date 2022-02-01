@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id "cup.gradle.cup-gradle-plugin" version "2.0"
+    id "org.xbib.gradle.plugin.jflex" version "1.5.0"
+}
+
+group 'com.evi0s.cse6341'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+cup {
+    args = ["-interface", "-parser", "Parser"]
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.evi0s.cse6341.p1.interpreter.Interpreter'
+    }
+    from sourceSets.main.output
+    dependsOn configurations.runtimeClasspath
+
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    }
+}
