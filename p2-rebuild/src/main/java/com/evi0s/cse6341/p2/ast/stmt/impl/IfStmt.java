@@ -3,6 +3,7 @@ package com.evi0s.cse6341.p2.ast.stmt.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.CondExpr;
 import com.evi0s.cse6341.p2.ast.stmt.Stmt;
+import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.Type;
 
@@ -39,7 +40,7 @@ public class IfStmt extends Stmt {
     }
 
     @Override
-    public void check(Map<String, Type> table) {
+    public void check(IdentMap table) {
 
     }
 

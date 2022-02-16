@@ -27,13 +27,13 @@ import interpreter.Interpreter;
   private Symbol symbol(String name, int sym) {
       return symbolFactory.newSymbol(name, sym, new Location(yyline+1,yycolumn+1,yyline+1), new Location(yyline+1,yycolumn+yylength(),yycolumn+1));
   }
-  
+
   private Symbol symbol(String name, int sym, Object val) {
       Location left = new Location(yyline + 1, yycolumn + 1, yyline + 1);
       Location right = new Location(yyline + 1, yycolumn + yylength(), yycolumn + 1);
       return symbolFactory.newSymbol(name, sym, left, right, val);
-  } 
-%} 
+  }
+%}
 
 %eofval{
      return symbolFactory.newSymbol("EOF", EOF, new Location(yyline + 1, yycolumn + 1, yychar), new Location(yyline + 1, yycolumn + 1, yychar + 1));

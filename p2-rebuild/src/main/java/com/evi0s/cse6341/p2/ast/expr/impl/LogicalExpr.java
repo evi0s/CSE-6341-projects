@@ -1,6 +1,7 @@
 package com.evi0s.cse6341.p2.ast.expr.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.CondExpr;
+import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.Type;
 
@@ -47,7 +48,7 @@ public class LogicalExpr extends CondExpr {
     }
 
     @Override
-    public void check(Map<String, Type> table) {
+    public void check(IdentMap table) {
 
     }
 }

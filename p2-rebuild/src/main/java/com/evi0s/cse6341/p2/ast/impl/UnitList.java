@@ -2,6 +2,7 @@ package com.evi0s.cse6341.p2.ast.impl;
 
 import com.evi0s.cse6341.p2.ast.ASTNode;
 import com.evi0s.cse6341.p2.ast.Unit;
+import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.Type;
 
@@ -26,10 +27,7 @@ public class UnitList extends ASTNode {
     }
 
     public void print(PrintStream ps) {
-        unit.print(ps);
-        ps.println();
-        if (unitList != null)
-            unitList.print(ps);
+        print(ps, "");
     }
 
     public void print(PrintStream ps, String indent) {
@@ -40,7 +38,7 @@ public class UnitList extends ASTNode {
     }
 
     @Override
-    public void check(Map<String, Type> identTable) {
+    public void check(IdentMap identTable) {
         this.unit.check(identTable);
         if (this.unitList != null) {
             this.unitList.check(identTable);

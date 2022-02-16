@@ -3,6 +3,7 @@ package com.evi0s.cse6341.p2.ast.stmt.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.ast.stmt.Stmt;
+import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.Type;
 
@@ -24,12 +25,14 @@ public class PrintStmt extends Stmt {
     }
 
     @Override
-    public void print(PrintStream ps, String ident) {
-
+    public void print(PrintStream ps, String indent) {
+        ps.print(indent + "print ");
+        expr.print(ps);
+        ps.print(";");
     }
 
     @Override
-    public void check(Map<String, Type> identTable) {
+    public void check(IdentMap identTable) {
         this.expr.check(identTable);
     }
 }

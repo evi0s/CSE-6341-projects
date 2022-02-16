@@ -1,6 +1,7 @@
 package com.evi0s.cse6341.p2.ast.expr.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.Expr;
+import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.Type;
 
@@ -22,7 +23,7 @@ public class UnaryMinusExpr extends Expr {
     }
 
     @Override
-    public void check(Map<String, Type> identTable) {
+    public void check(IdentMap identTable) {
 
     }
 }

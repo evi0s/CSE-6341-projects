@@ -9,6 +9,7 @@ import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.errors.DuplicateVarDeclarationError;
 import com.evi0s.cse6341.p2.errors.TypeMismatchError;
 import com.evi0s.cse6341.p2.ast.Unit;
+import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.IdentTable;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.Type;
@@ -43,12 +44,18 @@ public class Decl extends Unit {
     }
 
     @Override
-    public void print(PrintStream ps, String ident) {
-
+    public void print(PrintStream ps, String indent) {
+        ps.print(indent);
+        varDecl.print(ps);
+        if (expr != null) {
+            ps.print(" = ");
+            expr.print(ps);
+        }
+        ps.print(";");
     }
 
     @Override
-    public void check(Map<String, Type> identTable) throws DuplicateVarDeclarationError, TypeMismatchError {
+    public void check(IdentMap identTable) throws DuplicateVarDeclarationError, TypeMismatchError {
         HashMap<String, Type> globalTable = IdentTable.getInstance().getIndentTable();
 
         // check if the variable is already declared

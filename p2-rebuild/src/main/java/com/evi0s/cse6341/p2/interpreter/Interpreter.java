@@ -2,6 +2,7 @@ package com.evi0s.cse6341.p2.interpreter;
 
 import com.evi0s.cse6341.p2.ast.impl.Program;
 import com.evi0s.cse6341.p2.misc.IdentTable;
+import com.evi0s.cse6341.p2.misc.ScopeStack;
 import com.evi0s.cse6341.p2.parser.ParserWrapper;
 import com.evi0s.cse6341.p2.errors.DuplicateVarDeclarationError;
 import com.evi0s.cse6341.p2.errors.TypeMismatchError;
@@ -18,12 +19,19 @@ public class Interpreter {
     public static final int EXIT_SUCCESS = 0;
     public static final int EXIT_PARSING_ERROR = 1;
     public static final int EXIT_STATIC_CHECKING_ERROR = 2;
+    public static final int EXIT_RUNTIME_ERROR = 3;
 
     public static void main(String[] args) {
         String filename = args[0];
         Program astRoot = null;
         BufferedReader reader;
+
+        // initialize the symbol table
         IdentTable.initializeInstance();
+
+        // initialize the scope stack
+        ScopeStack.initializeInstance();
+        ScopeStack.getInstance().initializeScopeStack();
 
         try {
             reader = new BufferedReader(new FileReader(filename));
@@ -47,8 +55,11 @@ public class Interpreter {
         // TODO: type checking. If the program does not typecheck,
         // call fatalError with return code EXIT_STATIC_CHECKING_ERROR
         try {
-            astRoot.check(IdentTable.getInstance().getIndentTable());
-        } catch (TypeMismatchError | DuplicateVarDeclarationError | UndefinedIdentError e) {
+            astRoot.check(ScopeStack.getInstance().getCurrentScopeIdentMap());
+        } catch (IllegalStateException e) {
+            Interpreter.fatalError(e.getLocalizedMessage(), EXIT_RUNTIME_ERROR);
+        }
+        catch (TypeMismatchError | DuplicateVarDeclarationError | UndefinedIdentError e) {
             Interpreter.fatalError(e.getLocalizedMessage(), EXIT_STATIC_CHECKING_ERROR);
         }
 
