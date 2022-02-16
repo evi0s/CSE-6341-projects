@@ -1,12 +1,10 @@
 package com.evi0s.cse6341.p2.ast.expr.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.Expr;
-import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.Type;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public class FloatConstExpr extends Expr {
     public final Double fval;
@@ -21,7 +19,7 @@ public class FloatConstExpr extends Expr {
     }
 
     @Override
-    public void check(IdentMap table) {
+    public void check() {
         this.type = Type.TYPE_FLOAT;
     }
 }

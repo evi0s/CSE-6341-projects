@@ -3,15 +3,14 @@ package com.evi0s.cse6341.p2.ast.decl;
 
 import java.io.PrintStream;
 import java.util.HashMap;
-import java.util.Map;
 
 import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.errors.DuplicateVarDeclarationError;
 import com.evi0s.cse6341.p2.errors.TypeMismatchError;
 import com.evi0s.cse6341.p2.ast.Unit;
 import com.evi0s.cse6341.p2.misc.IdentMap;
-import com.evi0s.cse6341.p2.misc.IdentTable;
 import com.evi0s.cse6341.p2.misc.Location;
+import com.evi0s.cse6341.p2.misc.ScopeStack;
 import com.evi0s.cse6341.p2.misc.Type;
 
 
@@ -55,17 +54,17 @@ public class Decl extends Unit {
     }
 
     @Override
-    public void check(IdentMap identTable) throws DuplicateVarDeclarationError, TypeMismatchError {
-        HashMap<String, Type> globalTable = IdentTable.getInstance().getIndentTable();
+    public void check() throws DuplicateVarDeclarationError, TypeMismatchError {
+        IdentMap currentScopeIdentMap = ScopeStack.getInstance().getCurrentScopeIdentMap();
 
         // check if the variable is already declared
-        if (globalTable.containsKey(this.varDecl.ident)) {
+        if (currentScopeIdentMap.containsKey(this.varDecl.ident)) {
             throw new DuplicateVarDeclarationError(this.TAG, this.varDecl.ident, this.loc);
         }
 
         if (this.expr != null) {
             // check if the assigned expression has undefined variables
-            this.expr.check(identTable);
+            this.expr.check();
 
             // type check
             if (!this.varDecl.getType().equals(this.expr.type)) {
@@ -74,6 +73,6 @@ public class Decl extends Unit {
         }
 
         // add the identifier to the table
-        this.varDecl.check(identTable);
+        this.varDecl.check();
     }
 }

@@ -20,7 +20,7 @@ public abstract class VarDecl extends ASTNode {
 
     public abstract void print(PrintStream ps);
 
-    public abstract void check(IdentMap declTable);
+    public abstract void check();
 
     public abstract Type getType();
 }

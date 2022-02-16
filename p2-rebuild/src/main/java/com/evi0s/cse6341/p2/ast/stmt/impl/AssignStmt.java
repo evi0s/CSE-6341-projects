@@ -5,9 +5,7 @@ import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.ast.stmt.Stmt;
 import com.evi0s.cse6341.p2.errors.TypeMismatchError;
 import com.evi0s.cse6341.p2.errors.UndefinedIdentError;
-import com.evi0s.cse6341.p2.misc.IdentMap;
-import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.Type;
+import com.evi0s.cse6341.p2.misc.*;
 
 import java.io.PrintStream;
 import java.util.Map;
@@ -39,15 +37,15 @@ public class AssignStmt extends Stmt {
     }
 
     @Override
-    public void check(IdentMap identTable) throws UndefinedIdentError, TypeMismatchError {
-        this.expr.check(identTable);
+    public void check() throws UndefinedIdentError, TypeMismatchError {
+        this.expr.check();
 
-        Type type = identTable.get(this.ident);
-        if (type == null) {
+        Pair<String, Type> info = ScopeStack.getInstance().findIdentByName(this.ident);
+        if (info == null) {
             throw new UndefinedIdentError(this.TAG, this.ident, this.loc);
         } else {
-            if (!type.equals(expr.type)) {
-                throw new TypeMismatchError(this.TAG, this.ident, type, expr.type, this.loc);
+            if (!info.second.equals(expr.type)) {
+                throw new TypeMismatchError(this.TAG, this.ident, info.second, expr.type, this.loc);
             }
         }
     }

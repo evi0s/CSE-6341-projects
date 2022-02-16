@@ -40,8 +40,16 @@ public class IfStmt extends Stmt {
     }
 
     @Override
-    public void check(IdentMap table) {
+    public void check() {
+        expr.check();
 
+        // check then stmt
+        thenstmt.check();
+
+        // if else stmt exists, check it
+        if (elsestmt != null) {
+            elsestmt.check();
+        }
     }
 
     public void print(PrintStream ps) {

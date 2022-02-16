@@ -3,12 +3,10 @@ package com.evi0s.cse6341.p2.ast.expr.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.errors.UndefinedIdentError;
-import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.Type;
+import com.evi0s.cse6341.p2.misc.ScopeStack;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public class IdentExpr extends Expr {
 
@@ -26,10 +24,10 @@ public class IdentExpr extends Expr {
     }
 
     @Override
-    public void check(IdentMap identTable) throws UndefinedIdentError {
-        if (identTable.get(this.ident) == null) {
+    public void check() throws UndefinedIdentError {
+        if (ScopeStack.getInstance().findIdentByName(this.ident) == null) {
             throw new UndefinedIdentError(this.TAG, this.ident, this.loc);
         }
-        this.type = identTable.get(this.ident);
+        this.type = ScopeStack.getInstance().findIdentByName(this.ident).second;
     }
 }

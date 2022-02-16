@@ -27,7 +27,9 @@ public class WhileStmt extends Stmt {
     }
 
     @Override
-    public void check(IdentMap table) {
+    public void check() {
+        expr.check();
 
+        body.check();
     }
 }

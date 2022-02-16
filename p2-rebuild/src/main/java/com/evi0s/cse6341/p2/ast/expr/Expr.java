@@ -17,5 +17,5 @@ public abstract class Expr extends ASTNode {
     }
 
     public abstract void print(PrintStream ps);
-    public abstract void check(IdentMap identTable);
+    public abstract void check();
 }

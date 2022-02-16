@@ -1,14 +1,15 @@
 package com.evi0s.cse6341.p2.ast.expr.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.CondExpr;
-import com.evi0s.cse6341.p2.misc.IdentMap;
+import com.evi0s.cse6341.p2.errors.TypeMismatchError;
 import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.Type;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public class LogicalExpr extends CondExpr {
+
+    private final String TAG = "LogicalExpr";
+
     public static final int AND = 1;
     public static final int OR = 2;
     public static final int NOT = 3;
@@ -48,7 +49,14 @@ public class LogicalExpr extends CondExpr {
     }
 
     @Override
-    public void check(IdentMap table) {
+    public void check() {
+        expr1.check();
+        expr2.check();
 
+        if (expr1.type != expr2.type) {
+            throw new TypeMismatchError(this.TAG, expr1.type, expr2.type, this.loc);
+        }
+
+        this.type = expr1.type;
     }
 }

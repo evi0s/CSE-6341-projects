@@ -4,6 +4,7 @@ import com.evi0s.cse6341.p2.ast.impl.UnitList;
 import com.evi0s.cse6341.p2.ast.stmt.Stmt;
 import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
+import com.evi0s.cse6341.p2.misc.ScopeStack;
 import com.evi0s.cse6341.p2.misc.Type;
 
 import java.io.PrintStream;
@@ -25,6 +26,15 @@ public class BlockStmt extends Stmt {
     }
 
     @Override
-    public void check(IdentMap table) {
+    public void check() {
+        // push
+        IdentMap newTable = new IdentMap();
+        ScopeStack.getInstance().push(newTable);
+
+        // check
+        this.block.check();
+
+        // pop
+        ScopeStack.getInstance().pop();
     }
 }

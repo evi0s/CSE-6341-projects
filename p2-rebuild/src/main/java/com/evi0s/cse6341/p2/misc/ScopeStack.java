@@ -1,16 +1,17 @@
 package com.evi0s.cse6341.p2.misc;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class ScopeStack {
     private static ScopeStack instance = null;
-    private final Stack<IdentMap> stack;
+    private final Deque<IdentMap> stack;
 
     public ScopeStack () {
-        this.stack = new Stack<IdentMap>();
+        this.stack = new ArrayDeque<IdentMap>();
     }
 
-    public ScopeStack(Stack<IdentMap> stack) {
+    public ScopeStack(Deque<IdentMap> stack) {
         this.stack = stack;
     }
 
@@ -35,7 +36,7 @@ public class ScopeStack {
         instance = null;
     }
 
-    public Stack<IdentMap> getScopeStack () {
+    public Deque<IdentMap> getScopeStack () {
         return this.stack;
     }
 
@@ -51,6 +52,37 @@ public class ScopeStack {
         }
         throw new IllegalStateException(ScopeStack.class.getSimpleName() +
                 " is not initialized, call initializeInstance(..) method first.");
+    }
 
+    public void push (IdentMap map) throws IllegalStateException {
+        if (this.stack != null) {
+            this.stack.push(map);
+            return;
+        }
+
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public IdentMap pop () throws IllegalStateException {
+        if (this.stack != null) {
+            return this.stack.pop();
+        }
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public Pair<String, Type> findIdentByName (String ident) throws IllegalStateException {
+        if (this.stack != null) {
+            for (IdentMap map : this.stack) {
+                if (map.containsKey(ident)) {
+                    return new Pair<>(ident, map.get(ident));
+                }
+            }
+            return null;
+        }
+
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
     }
 }

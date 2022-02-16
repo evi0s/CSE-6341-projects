@@ -32,7 +32,7 @@ public class PrintStmt extends Stmt {
     }
 
     @Override
-    public void check(IdentMap identTable) {
-        this.expr.check(identTable);
+    public void check() {
+        this.expr.check();
     }
 }

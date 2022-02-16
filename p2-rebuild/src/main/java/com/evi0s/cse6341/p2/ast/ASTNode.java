@@ -1,7 +1,6 @@
 package com.evi0s.cse6341.p2.ast;
 
 
-import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 
 import java.io.ByteArrayOutputStream;
@@ -16,7 +15,7 @@ public abstract class ASTNode implements INode{
     }
 
     public abstract void print(PrintStream ps);
-    public abstract void check(IdentMap table);
+    public abstract void check();
 
     public String toString() {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
