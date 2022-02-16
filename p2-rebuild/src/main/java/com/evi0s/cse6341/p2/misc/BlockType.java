@@ -1,11 +1,14 @@
 package com.evi0s.cse6341.p2.misc;
 
-public enum Type {
-    TYPE_INT("int"),
-    TYPE_FLOAT("float");
+public enum BlockType {
+    TYPE_IF("if"),
+    TYPE_WHILE("while"),
+    TYPE_PLAIN("plain"),
+    TYPE_GLOBAL("global");
 
     private final String type;
-    Type(String type) {
+
+    BlockType(String type) {
         this.type = type;
     }
 

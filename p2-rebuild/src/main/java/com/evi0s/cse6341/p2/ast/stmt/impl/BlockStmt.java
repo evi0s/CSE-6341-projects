@@ -2,13 +2,9 @@ package com.evi0s.cse6341.p2.ast.stmt.impl;
 
 import com.evi0s.cse6341.p2.ast.impl.UnitList;
 import com.evi0s.cse6341.p2.ast.stmt.Stmt;
-import com.evi0s.cse6341.p2.misc.IdentMap;
-import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.ScopeStack;
-import com.evi0s.cse6341.p2.misc.Type;
+import com.evi0s.cse6341.p2.misc.*;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public class BlockStmt extends Stmt {
     public final UnitList block;
@@ -28,7 +24,7 @@ public class BlockStmt extends Stmt {
     @Override
     public void check() {
         // push
-        IdentMap newTable = new IdentMap();
+        IdentMap newTable = new IdentMap(new ScopeTag(this.blockType));
         ScopeStack.getInstance().push(newTable);
 
         // check

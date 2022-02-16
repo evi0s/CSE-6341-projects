@@ -1,12 +1,10 @@
 package com.evi0s.cse6341.p2.ast.stmt.impl;
 import com.evi0s.cse6341.p2.ast.expr.CondExpr;
 import com.evi0s.cse6341.p2.ast.stmt.Stmt;
-import com.evi0s.cse6341.p2.misc.IdentMap;
+import com.evi0s.cse6341.p2.misc.BlockType;
 import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.Type;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public class WhileStmt extends Stmt {
     public final CondExpr expr;
@@ -30,6 +28,7 @@ public class WhileStmt extends Stmt {
     public void check() {
         expr.check();
 
+        body.blockType = BlockType.TYPE_WHILE;
         body.check();
     }
 }

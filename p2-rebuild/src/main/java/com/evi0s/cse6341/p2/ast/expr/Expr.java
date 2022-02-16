@@ -2,18 +2,16 @@ package com.evi0s.cse6341.p2.ast.expr;
 
 
 import com.evi0s.cse6341.p2.ast.ASTNode;
-import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.Type;
+import com.evi0s.cse6341.p2.misc.IdentType;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public abstract class Expr extends ASTNode {
-    public Type type;
+    public IdentType identType;
     public Expr(Location loc) {
         super(loc);
-        this.type = null;
+        this.identType = null;
     }
 
     public abstract void print(PrintStream ps);

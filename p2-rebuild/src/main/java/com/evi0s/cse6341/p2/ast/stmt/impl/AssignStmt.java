@@ -8,7 +8,6 @@ import com.evi0s.cse6341.p2.errors.UndefinedIdentError;
 import com.evi0s.cse6341.p2.misc.*;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public class AssignStmt extends Stmt {
 
@@ -40,12 +39,12 @@ public class AssignStmt extends Stmt {
     public void check() throws UndefinedIdentError, TypeMismatchError {
         this.expr.check();
 
-        Pair<String, Type> info = ScopeStack.getInstance().findIdentByName(this.ident);
+        IdentInfo info = ScopeStack.getInstance().findIdentByName(this.ident);
         if (info == null) {
             throw new UndefinedIdentError(this.TAG, this.ident, this.loc);
         } else {
-            if (!info.second.equals(expr.type)) {
-                throw new TypeMismatchError(this.TAG, this.ident, info.second, expr.type, this.loc);
+            if (!info.identType.equals(expr.identType)) {
+                throw new TypeMismatchError(this.TAG, this.ident, info.scopeTag, info.identType, expr.identType, this.loc);
             }
         }
     }

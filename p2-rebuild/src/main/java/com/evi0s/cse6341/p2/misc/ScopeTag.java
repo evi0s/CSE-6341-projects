@@ -1,16 +1,16 @@
 package com.evi0s.cse6341.p2.misc;
 
 public class ScopeTag {
-    public String type;
+    public BlockType type;
     public int hash;
 
-    public ScopeTag(String type) {
+    public ScopeTag(BlockType type) {
         this.type = type;
         this.hash = this.hashCode();
     }
 
     public ScopeTag() {
-        this.type = "plain";
+        this.type = BlockType.TYPE_PLAIN;
         this.hash = this.hashCode();
     }
 

@@ -42,7 +42,7 @@ public class ScopeStack {
 
     public void initializeScopeStack () {
         if (this.stack != null && this.stack.isEmpty()) {
-            this.stack.push(new IdentMap(new ScopeTag("root")));
+            this.stack.push(new IdentMap(new ScopeTag(BlockType.TYPE_GLOBAL)));
         }
     }
 
@@ -72,11 +72,11 @@ public class ScopeStack {
                 " is not initialized, call initializeInstance(..) method first.");
     }
 
-    public Pair<String, Type> findIdentByName (String ident) throws IllegalStateException {
+    public IdentInfo findIdentByName (String ident) throws IllegalStateException {
         if (this.stack != null) {
             for (IdentMap map : this.stack) {
                 if (map.containsKey(ident)) {
-                    return new Pair<>(ident, map.get(ident));
+                    return new IdentInfo(ident, map.get(ident), map.scopeTag);
                 }
             }
             return null;

@@ -6,18 +6,18 @@ import com.evi0s.cse6341.p2.errors.DuplicateVarDeclarationError;
 import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.ScopeStack;
-import com.evi0s.cse6341.p2.misc.Type;
+import com.evi0s.cse6341.p2.misc.IdentType;
 
 import java.io.PrintStream;
 
 public class FloatVarDecl extends VarDecl {
     private final String TAG = "FloatVarDecl";
 
-    public final Type type;
+    public final IdentType identType;
 
     public FloatVarDecl(String i, Location loc) {
         super(i, loc);
-        this.type = Type.TYPE_FLOAT;
+        this.identType = IdentType.TYPE_FLOAT;
     }
 
     public void print(PrintStream ps) {
@@ -25,8 +25,8 @@ public class FloatVarDecl extends VarDecl {
     }
 
     @Override
-    public Type getType() {
-        return this.type;
+    public IdentType getType() {
+        return this.identType;
     }
 
     @Override
@@ -38,6 +38,6 @@ public class FloatVarDecl extends VarDecl {
             throw new DuplicateVarDeclarationError(this.TAG, this.ident, this.loc);
         }
 
-        currentScopeIdentMap.put(ident, Type.TYPE_FLOAT);
+        currentScopeIdentMap.put(ident, IdentType.TYPE_FLOAT);
     }
 }

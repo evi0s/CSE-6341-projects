@@ -47,10 +47,10 @@ public class BinaryExpr extends Expr {
         expr1.check();
         expr2.check();
 
-        if (expr1.type != expr2.type) {
-            throw new TypeMismatchError(this.TAG, expr1.type, expr2.type, this.loc);
+        if (expr1.identType != expr2.identType) {
+            throw new TypeMismatchError(this.TAG, expr1.identType, expr2.identType, this.loc);
         }
 
-        this.type = expr1.type;
+        this.identType = expr1.identType;
     }
 }

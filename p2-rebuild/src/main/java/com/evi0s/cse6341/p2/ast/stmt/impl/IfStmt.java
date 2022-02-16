@@ -3,12 +3,10 @@ package com.evi0s.cse6341.p2.ast.stmt.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.CondExpr;
 import com.evi0s.cse6341.p2.ast.stmt.Stmt;
-import com.evi0s.cse6341.p2.misc.IdentMap;
+import com.evi0s.cse6341.p2.misc.BlockType;
 import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.Type;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 public class IfStmt extends Stmt {
     public final CondExpr expr;
@@ -44,10 +42,12 @@ public class IfStmt extends Stmt {
         expr.check();
 
         // check then stmt
+        thenstmt.blockType = BlockType.TYPE_IF;
         thenstmt.check();
 
         // if else stmt exists, check it
         if (elsestmt != null) {
+            elsestmt.blockType = BlockType.TYPE_IF;
             elsestmt.check();
         }
     }

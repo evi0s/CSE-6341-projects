@@ -2,7 +2,7 @@ package com.evi0s.cse6341.p2.ast.expr.impl;
 
 import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.misc.Location;
-import com.evi0s.cse6341.p2.misc.Type;
+import com.evi0s.cse6341.p2.misc.IdentType;
 
 import java.io.PrintStream;
 
@@ -20,6 +20,6 @@ public class FloatConstExpr extends Expr {
 
     @Override
     public void check() {
-        this.type = Type.TYPE_FLOAT;
+        this.identType = IdentType.TYPE_FLOAT;
     }
 }

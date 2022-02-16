@@ -2,7 +2,6 @@ package com.evi0s.cse6341.p2.ast.decl;
 
 
 import java.io.PrintStream;
-import java.util.HashMap;
 
 import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.errors.DuplicateVarDeclarationError;
@@ -11,7 +10,6 @@ import com.evi0s.cse6341.p2.ast.Unit;
 import com.evi0s.cse6341.p2.misc.IdentMap;
 import com.evi0s.cse6341.p2.misc.Location;
 import com.evi0s.cse6341.p2.misc.ScopeStack;
-import com.evi0s.cse6341.p2.misc.Type;
 
 
 public class Decl extends Unit {
@@ -67,8 +65,8 @@ public class Decl extends Unit {
             this.expr.check();
 
             // type check
-            if (!this.varDecl.getType().equals(this.expr.type)) {
-                throw new TypeMismatchError(this.TAG, this.varDecl.ident, this.varDecl.getType(), this.expr.type, this.loc);
+            if (!this.varDecl.getType().equals(this.expr.identType)) {
+                throw new TypeMismatchError(this.TAG, this.varDecl.ident, this.varDecl.getType(), this.expr.identType, this.loc);
             }
         }
 

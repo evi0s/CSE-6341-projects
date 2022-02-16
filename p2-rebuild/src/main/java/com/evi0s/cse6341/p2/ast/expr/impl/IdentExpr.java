@@ -28,6 +28,6 @@ public class IdentExpr extends Expr {
         if (ScopeStack.getInstance().findIdentByName(this.ident) == null) {
             throw new UndefinedIdentError(this.TAG, this.ident, this.loc);
         }
-        this.type = ScopeStack.getInstance().findIdentByName(this.ident).second;
+        this.identType = ScopeStack.getInstance().findIdentByName(this.ident).identType;
     }
 }

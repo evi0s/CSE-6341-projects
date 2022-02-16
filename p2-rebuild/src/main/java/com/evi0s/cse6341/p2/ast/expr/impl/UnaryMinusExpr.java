@@ -22,6 +22,6 @@ public class UnaryMinusExpr extends Expr {
     @Override
     public void check() {
         expr.check();
-        type = expr.type;
+        identType = expr.identType;
     }
 }
