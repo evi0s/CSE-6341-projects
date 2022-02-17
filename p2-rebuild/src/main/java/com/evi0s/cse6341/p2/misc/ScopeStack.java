@@ -8,7 +8,7 @@ public class ScopeStack {
     private final Deque<IdentMap> stack;
 
     public ScopeStack () {
-        this.stack = new ArrayDeque<IdentMap>();
+        this.stack = new ArrayDeque<>();
     }
 
     public ScopeStack(Deque<IdentMap> stack) {

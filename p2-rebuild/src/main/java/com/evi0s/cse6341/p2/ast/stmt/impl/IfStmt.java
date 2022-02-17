@@ -42,12 +42,12 @@ public class IfStmt extends Stmt {
         expr.check();
 
         // check then stmt
-        thenstmt.blockType = BlockType.TYPE_IF;
+        thenstmt.blockType = BlockType.TYPE_IF_THEN;
         thenstmt.check();
 
         // if else stmt exists, check it
         if (elsestmt != null) {
-            elsestmt.blockType = BlockType.TYPE_IF;
+            elsestmt.blockType = BlockType.TYPE_IF_ELSE;
             elsestmt.check();
         }
     }

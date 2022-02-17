@@ -8,7 +8,6 @@ import com.evi0s.cse6341.p2.errors.TypeMismatchError;
 import com.evi0s.cse6341.p2.errors.UndefinedIdentError;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class Interpreter {
     public static final String TAG = "Interpreter";

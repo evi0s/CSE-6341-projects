@@ -57,7 +57,7 @@ public class Decl extends Unit {
 
         // check if the variable is already declared
         if (currentScopeIdentMap.containsKey(this.varDecl.ident)) {
-            throw new DuplicateVarDeclarationError(this.TAG, this.varDecl.ident, this.loc);
+            throw new DuplicateVarDeclarationError(this.TAG, this.varDecl.ident, currentScopeIdentMap.scopeTag, this.loc);
         }
 
         if (this.expr != null) {
