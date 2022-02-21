@@ -37,12 +37,8 @@ public class LogicalExpr extends CondExpr {
         ps.print("(");
         expr1.print(ps);
         switch (op) {
-            case AND:
-                ps.print("&&");
-                break;
-            case OR:
-                ps.print("||");
-                break;
+            case AND -> ps.print("&&");
+            case OR -> ps.print("||");
         }
         expr2.print(ps);
         ps.print(")");
@@ -50,6 +46,12 @@ public class LogicalExpr extends CondExpr {
 
     @Override
     public void check() {
+        if (this.op == NOT) {
+            expr1.check();
+            this.identType = expr1.identType;
+            return;
+        }
+
         expr1.check();
         expr2.check();
 

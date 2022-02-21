@@ -3,6 +3,7 @@ package com.evi0s.cse6341.p2.ast.expr.impl;
 import com.evi0s.cse6341.p2.ast.expr.CondExpr;
 import com.evi0s.cse6341.p2.ast.expr.Expr;
 import com.evi0s.cse6341.p2.errors.TypeMismatchError;
+import com.evi0s.cse6341.p2.misc.IdentType;
 import com.evi0s.cse6341.p2.misc.Location;
 
 import java.io.PrintStream;
@@ -56,6 +57,6 @@ public class CompExpr extends CondExpr {
             throw new TypeMismatchError(this.TAG, expr1.identType, expr2.identType, loc);
         }
 
-        this.identType = expr1.identType;
+        this.identType = IdentType.TYPE_BOOLEAN;
     }
 }

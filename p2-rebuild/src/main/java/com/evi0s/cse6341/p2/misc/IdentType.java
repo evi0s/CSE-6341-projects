@@ -2,7 +2,8 @@ package com.evi0s.cse6341.p2.misc;
 
 public enum IdentType {
     TYPE_INT("int"),
-    TYPE_FLOAT("float");
+    TYPE_FLOAT("float"),
+    TYPE_BOOLEAN("boolean");
 
     private final String type;
     IdentType(String type) {
