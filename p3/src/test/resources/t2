@@ -1,0 +1,7 @@
+int x = readint + 1;
+{
+    x = x + 1;
+    float x = 2. + readfloat;
+    print x;
+}
+print x;

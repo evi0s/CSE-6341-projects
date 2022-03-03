@@ -1,0 +1,125 @@
+package com.evi0s.cse6341.p3.misc;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class ScopeStack {
+    private static ScopeStack instance = null;
+    private final Deque<ScopeBlock> stack;
+
+    public ScopeStack () {
+        this.stack = new ArrayDeque<>();
+    }
+
+    public ScopeStack(Deque<ScopeBlock> stack) {
+        this.stack = stack;
+    }
+
+    public synchronized static ScopeStack getInstance () {
+        if (instance == null) {
+            instance = new ScopeStack();
+        }
+        return instance;
+    }
+
+    public static synchronized void initializeInstance () {
+        if (instance != null) {
+            instance = new ScopeStack();
+        }
+    }
+
+    public static synchronized void resetInstance () {
+        instance = new ScopeStack();
+    }
+
+    public static synchronized void destroyInstance () {
+        instance = null;
+    }
+
+    public Deque<ScopeBlock> getScopeStack () {
+        return this.stack;
+    }
+
+    public void initializeScopeStack () {
+        if (this.stack != null && this.stack.isEmpty()) {
+            this.stack.push(new ScopeBlock(new ScopeTag(BlockType.TYPE_GLOBAL)));
+        }
+    }
+
+    public ScopeBlock getCurrentScopeBlock () throws IllegalStateException {
+        if (this.stack != null && !this.stack.isEmpty()) {
+            return this.stack.peek();
+        }
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public IdentMap getCurrentScopeIdentMap () throws IllegalStateException {
+        if (this.stack != null && !this.stack.isEmpty()) {
+            return this.stack.peek().getIdentMap();
+        }
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public ScopeTag getCurrentScopeTag () throws IllegalStateException {
+        if (this.stack != null && !this.stack.isEmpty()) {
+            return this.stack.peek().getScopeTag();
+        }
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public void push (ScopeBlock block) throws IllegalStateException {
+        if (this.stack != null) {
+            this.stack.push(block);
+            return;
+        }
+
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public ScopeBlock pop () throws IllegalStateException {
+        if (this.stack != null) {
+            return this.stack.pop();
+        }
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public IdentInfo findIdentByName (String ident) throws IllegalStateException {
+        if (this.stack != null) {
+            for (ScopeBlock block : this.stack) {
+                IdentMap identMap = block.getIdentMap();
+                if (identMap.containsKey(ident)) {
+                    IdentState identState = block.getIdentState();
+                    return new IdentInfo(ident, identMap.get(ident), identState.get(ident), block.scopeTag);
+                }
+            }
+            return null;
+        }
+
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public void setIdentValueByName (String ident, Number value) throws IllegalStateException, NullPointerException {
+        if (this.stack != null) {
+            for (ScopeBlock block : this.stack) {
+                IdentMap identMap = block.getIdentMap();
+                if (identMap.containsKey(ident)) {
+                    if (block.getIdentState().get(ident) == null) {
+                        throw new NullPointerException("IdentState is null for ident: " + ident);
+                    }
+                    block.getIdentState().put(ident, value);
+                }
+            }
+
+            throw new NullPointerException("Identifier `" + ident + "' not found.");
+        }
+
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+}
