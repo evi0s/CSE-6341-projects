@@ -2,6 +2,9 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="com.evi0s.cse6341.p2" target="16" />
+      <module name="com.evi0s.cse6341.p2.main" target="16" />
+      <module name="com.evi0s.cse6341.p2.test" target="16" />
       <module name="p2-rebuild" target="16" />
       <module name="p2-rebuild.main" target="16" />
       <module name="p2-rebuild.test" target="16" />
