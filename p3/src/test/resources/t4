@@ -1,3 +1,7 @@
-while(x > 0) {
-    print x;
+int a = 5;
+
+while (a > 0) {
+    a = a - 1;
+    int a = 4;
+    print a;
 }

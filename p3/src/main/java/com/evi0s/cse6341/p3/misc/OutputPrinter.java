@@ -1,48 +1,41 @@
 package com.evi0s.cse6341.p3.misc;
 
-import java.io.InputStream;
-import java.util.Scanner;
 
-public class InputScanner {
-    public static InputScanner instance = null;
-    public Scanner scanner;
+import java.io.PrintStream;
 
-    public InputScanner() {
-        this.scanner = new Scanner(System.in);
+public class OutputPrinter {
+    public static OutputPrinter instance = null;
+    public PrintStream printer;
+
+    public OutputPrinter() {
+        this.printer = System.out;
     }
 
-    public InputScanner(InputStream inputStream) {
-        this.scanner = new Scanner(inputStream);
+    public OutputPrinter(PrintStream printStream) {
+        this.printer = printStream;
     }
 
-    public synchronized static InputScanner getInstance () {
+    public synchronized static OutputPrinter getInstance () {
         if (instance == null) {
-            instance = new InputScanner();
+            instance = new OutputPrinter();
         }
         return instance;
     }
 
     public static synchronized void initializeInstance () {
         if (instance == null) {
-            instance = new InputScanner();
+            instance = new OutputPrinter();
         }
     }
 
     // will throw InputMismatchException if input is not a Long
-    public static Long getLong() throws IllegalStateException {
+    public static void print(String message) throws IllegalStateException {
         if (instance != null) {
-            return instance.scanner.nextLong();
+            instance.printer.print(message);
+            instance.printer.print("\n");
+            return;
         }
-        throw new IllegalStateException(InputScanner.class.getSimpleName() +
-                " is not initialized, call initializeInstance(..) method first.");
-    }
-
-    // will throw InputMismatchException if input is not a Double
-    public static Double getDouble() throws IllegalStateException {
-        if (instance != null) {
-            return instance.scanner.nextDouble();
-        }
-        throw new IllegalStateException(InputScanner.class.getSimpleName() +
+        throw new IllegalStateException(OutputPrinter.class.getSimpleName() +
                 " is not initialized, call initializeInstance(..) method first.");
     }
 

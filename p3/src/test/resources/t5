@@ -1,10 +1,6 @@
-int x = 0;
-{
-    x = 1;
-    float x = 2.;
-    float y = 3.;
-    x = 4.;
+int a = 0;
+int b = 2;
+if (!(a == b)) {
+    float a = 3.4;
+    print -a;
 }
-print x;
-y = 5.;
-print y;

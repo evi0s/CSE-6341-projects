@@ -1,8 +1,10 @@
 package com.evi0s.cse6341.p3.interpreter;
 
 import com.evi0s.cse6341.p3.ast.impl.Program;
-import com.evi0s.cse6341.p3.errors.RuntimeError;
-import com.evi0s.cse6341.p3.misc.ScopeStack;
+import com.evi0s.cse6341.p3.errors.InterpreterRuntimeError;
+import com.evi0s.cse6341.p3.datastructures.ScopeStack;
+import com.evi0s.cse6341.p3.misc.InputScanner;
+import com.evi0s.cse6341.p3.misc.OutputPrinter;
 import com.evi0s.cse6341.p3.parser.ParserWrapper;
 import com.evi0s.cse6341.p3.errors.DuplicateVarDeclarationError;
 import com.evi0s.cse6341.p3.errors.TypeMismatchError;
@@ -61,10 +63,23 @@ public class Interpreter {
             Interpreter.fatalError(e.getLocalizedMessage(), EXIT_STATIC_CHECKING_ERROR);
         }
 
+        // reset the scope stack
+        ScopeStack.resetInstance();
+        ScopeStack.getInstance().initializeScopeStack();
+
+        // initialize the scanner
+        InputScanner.initializeInstance();
+
+        // initialize the printer
+        OutputPrinter.initializeInstance();
+
         // run the program
         try {
             astRoot.evaluate();
-        } catch (RuntimeError e) {
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            Interpreter.fatalError(e.getLocalizedMessage(), EXIT_RUNTIME_ERROR);
+        } catch (InterpreterRuntimeError e) {
             switch (e.type) {
                 case DIV_BY_ZERO       -> Interpreter.fatalError(e.getLocalizedMessage(), EXIT_DIV_BY_ZERO_ERROR);
                 case UNINITIALIZED_VAR -> Interpreter.fatalError(e.getLocalizedMessage(), EXIT_UNINITIALIZED_VAR_ERROR);

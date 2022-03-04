@@ -3,10 +3,10 @@ package com.evi0s.cse6341.p3.ast.decl.impl;
 
 import com.evi0s.cse6341.p3.ast.decl.VarDecl;
 import com.evi0s.cse6341.p3.errors.DuplicateVarDeclarationError;
-import com.evi0s.cse6341.p3.misc.IdentMap;
+import com.evi0s.cse6341.p3.datastructures.IdentMap;
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.ScopeStack;
-import com.evi0s.cse6341.p3.misc.IdentType;
+import com.evi0s.cse6341.p3.datastructures.ScopeStack;
+import com.evi0s.cse6341.p3.types.IdentType;
 
 import java.io.PrintStream;
 
@@ -43,6 +43,6 @@ public class FloatVarDecl extends VarDecl {
 
     @Override
     public void evaluate() {
-
+        ScopeStack.getInstance().getCurrentScopeIdentMap().put(ident, IdentType.TYPE_FLOAT);
     }
 }

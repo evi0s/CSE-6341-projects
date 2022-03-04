@@ -3,7 +3,7 @@ package com.evi0s.cse6341.p3.ast.expr.impl;
 import com.evi0s.cse6341.p3.ast.expr.CondExpr;
 import com.evi0s.cse6341.p3.ast.expr.Expr;
 import com.evi0s.cse6341.p3.errors.TypeMismatchError;
-import com.evi0s.cse6341.p3.misc.IdentType;
+import com.evi0s.cse6341.p3.types.IdentType;
 import com.evi0s.cse6341.p3.misc.Location;
 
 import java.io.PrintStream;
@@ -62,6 +62,40 @@ public class CompExpr extends CondExpr {
 
     @Override
     public void evaluate() {
+        expr1.evaluate();
+        expr2.evaluate();
 
+        switch (op) {
+            case GE -> {
+                if (expr1.evaluatedValue instanceof Long && expr2.evaluatedValue instanceof Long) {
+                    this.evaluatedValue = (Long) expr1.evaluatedValue >= (Long) expr2.evaluatedValue;
+                } else if (expr1.evaluatedValue instanceof Double && expr2.evaluatedValue instanceof Double) {
+                    this.evaluatedValue = (Double) expr1.evaluatedValue >= (Double) expr2.evaluatedValue;
+                }
+            }
+            case GT -> {
+                if (expr1.evaluatedValue instanceof Long && expr2.evaluatedValue instanceof Long) {
+                    this.evaluatedValue = (Long) expr1.evaluatedValue > (Long) expr2.evaluatedValue;
+                } else if (expr1.evaluatedValue instanceof Double && expr2.evaluatedValue instanceof Double) {
+                    this.evaluatedValue = (Double) expr1.evaluatedValue > (Double) expr2.evaluatedValue;
+                }
+            }
+            case LE -> {
+                if (expr1.evaluatedValue instanceof Long && expr2.evaluatedValue instanceof Long) {
+                    this.evaluatedValue = (Long) expr1.evaluatedValue <= (Long) expr2.evaluatedValue;
+                } else if (expr1.evaluatedValue instanceof Double && expr2.evaluatedValue instanceof Double) {
+                    this.evaluatedValue = (Double) expr1.evaluatedValue <= (Double) expr2.evaluatedValue;
+                }
+            }
+            case LT -> {
+                if (expr1.evaluatedValue instanceof Long && expr2.evaluatedValue instanceof Long) {
+                    this.evaluatedValue = (Long) expr1.evaluatedValue < (Long) expr2.evaluatedValue;
+                } else if (expr1.evaluatedValue instanceof Double && expr2.evaluatedValue instanceof Double) {
+                    this.evaluatedValue = (Double) expr1.evaluatedValue < (Double) expr2.evaluatedValue;
+                }
+            }
+            case EQ -> this.evaluatedValue = expr1.evaluatedValue.equals(expr2.evaluatedValue);
+            case NE -> this.evaluatedValue = !expr1.evaluatedValue.equals(expr2.evaluatedValue);
+        }
     }
 }

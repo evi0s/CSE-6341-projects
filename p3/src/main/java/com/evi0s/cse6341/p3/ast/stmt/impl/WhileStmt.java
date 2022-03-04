@@ -1,7 +1,8 @@
 package com.evi0s.cse6341.p3.ast.stmt.impl;
+
 import com.evi0s.cse6341.p3.ast.expr.CondExpr;
 import com.evi0s.cse6341.p3.ast.stmt.Stmt;
-import com.evi0s.cse6341.p3.misc.BlockType;
+import com.evi0s.cse6341.p3.types.BlockType;
 import com.evi0s.cse6341.p3.misc.Location;
 
 import java.io.PrintStream;
@@ -34,6 +35,11 @@ public class WhileStmt extends Stmt {
 
     @Override
     public void evaluate() {
+        expr.evaluate();
 
+        while (expr.evaluatedValue) {
+            body.evaluate();
+            expr.evaluate();
+        }
     }
 }

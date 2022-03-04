@@ -3,7 +3,7 @@ package com.evi0s.cse6341.p3.ast.decl;
 
 import com.evi0s.cse6341.p3.ast.ASTNode;
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.IdentType;
+import com.evi0s.cse6341.p3.types.IdentType;
 
 import java.io.PrintStream;
 

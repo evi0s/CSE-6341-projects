@@ -46,13 +46,12 @@ public class LogicalExpr extends CondExpr {
 
     @Override
     public void check() {
+        expr1.check();
         if (this.op == NOT) {
-            expr1.check();
             this.identType = expr1.identType;
             return;
         }
 
-        expr1.check();
         expr2.check();
 
         if (expr1.identType != expr2.identType) {
@@ -64,6 +63,16 @@ public class LogicalExpr extends CondExpr {
 
     @Override
     public void evaluate() {
+        expr1.evaluate();
+        if (this.op == NOT) {
+            this.evaluatedValue = !expr1.evaluatedValue;
+            return;
+        }
 
+        expr2.evaluate();
+        switch (op) {
+            case AND -> this.evaluatedValue = expr1.evaluatedValue && expr2.evaluatedValue;
+            case OR -> this.evaluatedValue = expr1.evaluatedValue || expr2.evaluatedValue;
+        }
     }
 }

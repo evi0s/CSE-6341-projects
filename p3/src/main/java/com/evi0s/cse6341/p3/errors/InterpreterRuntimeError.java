@@ -2,7 +2,7 @@ package com.evi0s.cse6341.p3.errors;
 
 import com.evi0s.cse6341.p3.misc.Location;
 
-public class RuntimeError extends Error {
+public class InterpreterRuntimeError extends Error {
 
     public enum ErrorType {
         UNINITIALIZED_VAR("uninitialized variable"),
@@ -23,22 +23,22 @@ public class RuntimeError extends Error {
     public ErrorType type;
 
 
-    public RuntimeError(ErrorType type) {
+    public InterpreterRuntimeError(ErrorType type) {
         super("RuntimeError: " + type);
         this.type = type;
     }
 
-    public RuntimeError(String tag, ErrorType type) {
+    public InterpreterRuntimeError(String tag, ErrorType type) {
         super("[" + tag + "] " + "RuntimeError: " + type);
         this.type = type;
     }
 
-    public RuntimeError(String tag, ErrorType type, Location loc) {
+    public InterpreterRuntimeError(String tag, ErrorType type, Location loc) {
         super("[" + tag + "] " + "RuntimeError: " + type + " @ " + loc);
         this.type = type;
     }
 
-    public RuntimeError(String tag, ErrorType type, String reason, Location loc) {
+    public InterpreterRuntimeError(String tag, ErrorType type, String reason, Location loc) {
         super("[" + tag + "] " + "RuntimeError: " + type + " @ " + loc + ", reason: " + reason);
         this.type = type;
     }

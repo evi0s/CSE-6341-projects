@@ -1,4 +1,4 @@
-package com.evi0s.cse6341.p3.misc;
+package com.evi0s.cse6341.p3.datastructures;
 
 import com.evi0s.cse6341.p3.types.BlockType;
 
@@ -25,7 +25,7 @@ public class ScopeStack {
     }
 
     public static synchronized void initializeInstance () {
-        if (instance != null) {
+        if (instance == null) {
             instance = new ScopeStack();
         }
     }
@@ -106,15 +106,42 @@ public class ScopeStack {
                 " is not initialized, call initializeInstance(..) method first.");
     }
 
+    public void putNewIdentValueByName (String ident, Number value) throws IllegalStateException, NullPointerException {
+        if (this.stack != null) {
+            this.getCurrentScopeBlock().getIdentState().put(ident, value);
+            return;
+        }
+
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
     public void setIdentValueByName (String ident, Number value) throws IllegalStateException, NullPointerException {
         if (this.stack != null) {
             for (ScopeBlock block : this.stack) {
                 IdentMap identMap = block.getIdentMap();
                 if (identMap.containsKey(ident)) {
-                    if (block.getIdentState().get(ident) == null) {
-                        throw new NullPointerException("IdentState is null for ident: " + ident);
-                    }
+                    // if (block.getIdentState().get(ident) == null) {
+                    //     throw new NullPointerException("Uninitialized ident: " + ident);
+                    // }
                     block.getIdentState().put(ident, value);
+                    return;
+                }
+            }
+
+            throw new NullPointerException("Identifier `" + ident + "' not found.");
+        }
+
+        throw new IllegalStateException(ScopeStack.class.getSimpleName() +
+                " is not initialized, call initializeInstance(..) method first.");
+    }
+
+    public Number getIdentValueByName (String ident) throws IllegalStateException, NullPointerException {
+        if (this.stack != null) {
+            for (ScopeBlock block : this.stack) {
+                IdentMap identMap = block.getIdentMap();
+                if (identMap.containsKey(ident)) {
+                    return block.getIdentState().get(ident);
                 }
             }
 

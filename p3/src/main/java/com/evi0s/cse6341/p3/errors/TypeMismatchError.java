@@ -1,8 +1,8 @@
 package com.evi0s.cse6341.p3.errors;
 
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.IdentType;
-import com.evi0s.cse6341.p3.misc.ScopeTag;
+import com.evi0s.cse6341.p3.types.IdentType;
+import com.evi0s.cse6341.p3.datastructures.ScopeTag;
 
 
 public class TypeMismatchError extends Error {

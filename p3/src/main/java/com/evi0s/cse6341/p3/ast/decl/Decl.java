@@ -7,10 +7,10 @@ import com.evi0s.cse6341.p3.ast.expr.Expr;
 import com.evi0s.cse6341.p3.errors.DuplicateVarDeclarationError;
 import com.evi0s.cse6341.p3.errors.TypeMismatchError;
 import com.evi0s.cse6341.p3.ast.Unit;
-import com.evi0s.cse6341.p3.misc.IdentMap;
+import com.evi0s.cse6341.p3.datastructures.IdentMap;
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.ScopeStack;
-import com.evi0s.cse6341.p3.misc.ScopeTag;
+import com.evi0s.cse6341.p3.datastructures.ScopeStack;
+import com.evi0s.cse6341.p3.datastructures.ScopeTag;
 
 
 public class Decl extends Unit {
@@ -78,6 +78,16 @@ public class Decl extends Unit {
 
     @Override
     public void evaluate() {
+        // add the identifier to the table
+        this.varDecl.evaluate();
 
+        // evaluate initial value for the identifier
+        if (this.expr != null) {
+            this.expr.evaluate();
+            ScopeStack.getInstance().putNewIdentValueByName(this.varDecl.ident, this.expr.evaluatedValue);
+            return;
+        }
+
+        ScopeStack.getInstance().putNewIdentValueByName(this.varDecl.ident, null);
     }
 }

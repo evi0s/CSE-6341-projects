@@ -1,4 +1,4 @@
-package com.evi0s.cse6341.p3.misc;
+package com.evi0s.cse6341.p3.datastructures;
 
 import com.evi0s.cse6341.p3.types.IdentType;
 

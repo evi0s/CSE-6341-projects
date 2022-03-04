@@ -5,9 +5,9 @@ import com.evi0s.cse6341.p3.ast.expr.Expr;
 import com.evi0s.cse6341.p3.ast.stmt.Stmt;
 import com.evi0s.cse6341.p3.errors.TypeMismatchError;
 import com.evi0s.cse6341.p3.errors.UndefinedIdentError;
-import com.evi0s.cse6341.p3.misc.IdentInfo;
+import com.evi0s.cse6341.p3.datastructures.IdentInfo;
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.ScopeStack;
+import com.evi0s.cse6341.p3.datastructures.ScopeStack;
 
 import java.io.PrintStream;
 
@@ -53,6 +53,8 @@ public class AssignStmt extends Stmt {
 
     @Override
     public void evaluate() {
+        this.expr.evaluate();
 
+        ScopeStack.getInstance().setIdentValueByName(this.ident, this.expr.evaluatedValue);
     }
 }

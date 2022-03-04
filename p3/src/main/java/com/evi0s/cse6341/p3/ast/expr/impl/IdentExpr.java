@@ -2,9 +2,10 @@ package com.evi0s.cse6341.p3.ast.expr.impl;
 
 
 import com.evi0s.cse6341.p3.ast.expr.Expr;
+import com.evi0s.cse6341.p3.errors.InterpreterRuntimeError;
 import com.evi0s.cse6341.p3.errors.UndefinedIdentError;
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.ScopeStack;
+import com.evi0s.cse6341.p3.datastructures.ScopeStack;
 
 import java.io.PrintStream;
 
@@ -32,7 +33,13 @@ public class IdentExpr extends Expr {
     }
 
     @Override
-    public void evaluate() {
+    public void evaluate() throws InterpreterRuntimeError {
+        Number value = ScopeStack.getInstance().getIdentValueByName(this.ident);
+        if (value == null) {
+            throw new InterpreterRuntimeError(this.TAG, InterpreterRuntimeError.ErrorType.UNINITIALIZED_VAR,
+                    "evaluation on uninitialized variable: `" + this.ident + "'.", this.loc);
+        }
 
+        this.evaluatedValue = value;
     }
 }

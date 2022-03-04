@@ -3,7 +3,7 @@ package com.evi0s.cse6341.p3.ast.stmt.impl;
 
 import com.evi0s.cse6341.p3.ast.expr.CondExpr;
 import com.evi0s.cse6341.p3.ast.stmt.Stmt;
-import com.evi0s.cse6341.p3.misc.BlockType;
+import com.evi0s.cse6341.p3.types.BlockType;
 import com.evi0s.cse6341.p3.misc.Location;
 
 import java.io.PrintStream;
@@ -37,6 +37,10 @@ public class IfStmt extends Stmt {
         }
     }
 
+    public void print(PrintStream ps) {
+        print(ps, "");
+    }
+
     @Override
     public void check() {
         expr.check();
@@ -54,10 +58,12 @@ public class IfStmt extends Stmt {
 
     @Override
     public void evaluate() {
+        expr.evaluate();
 
-    }
-
-    public void print(PrintStream ps) {
-        print(ps, "");
+        if (expr.evaluatedValue) {
+            thenstmt.evaluate();
+        } else if (elsestmt != null) {
+            elsestmt.evaluate();
+        }
     }
 }

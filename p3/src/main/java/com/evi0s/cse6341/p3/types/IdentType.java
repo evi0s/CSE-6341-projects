@@ -1,4 +1,4 @@
-package com.evi0s.cse6341.p3.misc;
+package com.evi0s.cse6341.p3.types;
 
 public enum IdentType {
     TYPE_INT("int"),

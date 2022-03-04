@@ -4,6 +4,7 @@ package com.evi0s.cse6341.p3.ast.stmt.impl;
 import com.evi0s.cse6341.p3.ast.expr.Expr;
 import com.evi0s.cse6341.p3.ast.stmt.Stmt;
 import com.evi0s.cse6341.p3.misc.Location;
+import com.evi0s.cse6341.p3.misc.OutputPrinter;
 
 import java.io.PrintStream;
 
@@ -35,6 +36,7 @@ public class PrintStmt extends Stmt {
 
     @Override
     public void evaluate() {
-
+        this.expr.evaluate();
+        OutputPrinter.print(String.valueOf(this.expr.getEvaluatedValue()));
     }
 }

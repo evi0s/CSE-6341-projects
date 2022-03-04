@@ -27,6 +27,12 @@ public class UnaryMinusExpr extends Expr {
 
     @Override
     public void evaluate() {
+        this.expr.evaluate();
 
+        if (this.expr.evaluatedValue instanceof Long) {
+            this.evaluatedValue = -((Long) this.expr.evaluatedValue);
+        } else if (this.expr.evaluatedValue instanceof Double) {
+            this.evaluatedValue = -((Double) this.expr.evaluatedValue);
+        }
     }
 }

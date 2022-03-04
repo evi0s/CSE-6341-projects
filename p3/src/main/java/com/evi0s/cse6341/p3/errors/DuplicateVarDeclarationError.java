@@ -1,7 +1,7 @@
 package com.evi0s.cse6341.p3.errors;
 
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.ScopeTag;
+import com.evi0s.cse6341.p3.datastructures.ScopeTag;
 
 public class DuplicateVarDeclarationError extends Error {
     public DuplicateVarDeclarationError(String ident) {

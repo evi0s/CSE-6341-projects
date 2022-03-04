@@ -3,7 +3,7 @@ package com.evi0s.cse6341.p3.ast.expr.impl;
 
 import com.evi0s.cse6341.p3.ast.expr.Expr;
 import com.evi0s.cse6341.p3.misc.Location;
-import com.evi0s.cse6341.p3.misc.IdentType;
+import com.evi0s.cse6341.p3.types.IdentType;
 
 import java.io.PrintStream;
 
@@ -26,6 +26,6 @@ public class IntConstExpr extends Expr {
 
     @Override
     public void evaluate() {
-
+        this.evaluatedValue = ival;
     }
 }
