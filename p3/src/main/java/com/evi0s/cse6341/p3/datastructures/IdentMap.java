@@ -1,5 +1,7 @@
 package com.evi0s.cse6341.p3.misc;
 
+import com.evi0s.cse6341.p3.types.IdentType;
+
 import java.util.HashMap;
 
 public class IdentMap extends HashMap<String, IdentType> {

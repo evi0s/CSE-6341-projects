@@ -1,5 +1,8 @@
 package com.evi0s.cse6341.p3.misc;
 
+import com.evi0s.cse6341.p3.types.BlockType;
+import com.evi0s.cse6341.p3.types.IdentType;
+
 import java.io.Serializable;
 
 public class IdentInfo implements Serializable {

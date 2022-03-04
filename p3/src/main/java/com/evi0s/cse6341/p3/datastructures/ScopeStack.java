@@ -1,5 +1,7 @@
 package com.evi0s.cse6341.p3.misc;
 
+import com.evi0s.cse6341.p3.types.BlockType;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 
