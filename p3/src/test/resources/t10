@@ -1,0 +1,3 @@
+int a = readint;
+
+print a + 1;

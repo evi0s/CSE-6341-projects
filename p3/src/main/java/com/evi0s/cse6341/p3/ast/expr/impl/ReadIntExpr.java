@@ -8,6 +8,7 @@ import com.evi0s.cse6341.p3.types.IdentType;
 
 import java.io.PrintStream;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 
 public class ReadIntExpr extends Expr {
     private final String TAG = "ReadIntExpr";
@@ -29,9 +30,13 @@ public class ReadIntExpr extends Expr {
     public void evaluate() {
         try {
             this.evaluatedValue = InputScanner.getLong();
-        } catch (InputMismatchException e) {
+        } catch (NoSuchElementException e) {
+            if (e instanceof InputMismatchException) {
+                throw new InterpreterRuntimeError(this.TAG, InterpreterRuntimeError.ErrorType.FAILED_STDIN_READ,
+                        "failed to read from stdin: input type mismatch.", this.loc);
+            }
             throw new InterpreterRuntimeError(this.TAG, InterpreterRuntimeError.ErrorType.FAILED_STDIN_READ,
-                    "failed to read from stdin: input type mismatch", this.loc);
+                    "failed to read from stdin: no more input.", this.loc);
         }
     }
 }

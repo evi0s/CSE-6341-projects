@@ -2,6 +2,7 @@ package com.evi0s.cse6341.p3.misc;
 
 import java.io.InputStream;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class InputScanner {
@@ -30,7 +31,7 @@ public class InputScanner {
     }
 
     // will throw InputMismatchException if input is not a Long
-    public static Long getLong() throws IllegalStateException, InputMismatchException {
+    public static Long getLong() throws IllegalStateException, NoSuchElementException {
         if (instance != null) {
             return instance.scanner.nextLong();
         }
@@ -39,7 +40,7 @@ public class InputScanner {
     }
 
     // will throw InputMismatchException if input is not a Double
-    public static Double getDouble() throws IllegalStateException, InputMismatchException {
+    public static Double getDouble() throws IllegalStateException, NoSuchElementException {
         if (instance != null) {
             return instance.scanner.nextDouble();
         }
