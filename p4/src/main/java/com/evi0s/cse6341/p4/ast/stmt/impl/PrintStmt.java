@@ -43,6 +43,6 @@ public class PrintStmt extends Stmt {
     @Override
     public void abstractEvaluate() {
         this.expr.abstractEvaluate();
-        OutputPrinter.print(String.valueOf(this.expr.getEvaluatedValue()));
+        OutputPrinter.print(this.expr.getEvaluatedAbstractType().toString());
     }
 }

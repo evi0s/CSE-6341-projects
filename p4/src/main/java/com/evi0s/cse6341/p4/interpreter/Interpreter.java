@@ -82,7 +82,7 @@ public class Interpreter {
             }
         }
 
-        // comment out the following line to disable the evaluation
+        // comment out the following lines to disable the evaluation
         // // reset the scope stack
         // ScopeStack.resetInstance();
         // ScopeStack.getInstance().initializeScopeStack();
