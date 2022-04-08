@@ -5,8 +5,7 @@ public enum BlockType {
     TYPE_IF_ELSE("if-else"),
     TYPE_WHILE("while"),
     TYPE_PLAIN("plain"),
-    TYPE_GLOBAL("global"),
-    TYPE_MERGED_IF("merged-if");
+    TYPE_GLOBAL("global");
 
     private final String type;
 

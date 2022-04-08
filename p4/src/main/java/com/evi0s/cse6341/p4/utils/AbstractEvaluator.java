@@ -3,10 +3,8 @@ package com.evi0s.cse6341.p4.utils;
 import com.evi0s.cse6341.p4.datastructures.*;
 import com.evi0s.cse6341.p4.errors.AbstractEvaluationError;
 import com.evi0s.cse6341.p4.types.AbstractIdentType;
-import com.evi0s.cse6341.p4.types.BlockType;
 import com.evi0s.cse6341.p4.types.IdentType;
 import com.google.common.collect.HashBasedTable;
-import com.sun.source.tree.Scope;
 
 public class AbstractEvaluator {
     private static final HashBasedTable<AbstractIdentType, AbstractIdentType, AbstractIdentType> addOpTable = HashBasedTable.create();
