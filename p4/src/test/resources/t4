@@ -1,0 +1,8 @@
+int x;
+int a = 0;
+if (a == 1) {
+    x = 1;
+} else {
+    int z = 2;
+}
+int y = x;

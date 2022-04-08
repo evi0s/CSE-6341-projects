@@ -1,0 +1,17 @@
+int x = 1;
+int z;
+int a = 0;
+float b = 1.;
+
+if (a == 0) {
+    if (b == 0.) {
+        x = 11;
+    } else {
+        x = -1;
+        z = -1;
+    }
+} else {
+    x = 1;
+    z = 1;
+}
+int y = z;
