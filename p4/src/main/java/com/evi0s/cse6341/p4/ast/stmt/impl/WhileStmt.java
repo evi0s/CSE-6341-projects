@@ -2,6 +2,7 @@ package com.evi0s.cse6341.p4.ast.stmt.impl;
 
 import com.evi0s.cse6341.p4.ast.expr.CondExpr;
 import com.evi0s.cse6341.p4.ast.stmt.Stmt;
+import com.evi0s.cse6341.p4.datastructures.ScopeBlock;
 import com.evi0s.cse6341.p4.datastructures.ScopeStack;
 import com.evi0s.cse6341.p4.types.BlockType;
 import com.evi0s.cse6341.p4.misc.Location;
@@ -52,16 +53,19 @@ public class WhileStmt extends Stmt {
         // expr.abstractEvaluate();
 
         ScopeStack shadowStack = ScopeStack.cloneFromExistStack(ScopeStack.getInstance());
+        ScopeStack originalStack = ScopeStack.getInstance();
 
         while (true) {
             ScopeStack newStack = BlockNormalizer.normalize(body).abstractEvaluateWithShadowStack(shadowStack);
-            ScopeStack mergedStack = AbstractEvaluator.mergeScopeStack(shadowStack, newStack);
 
             // need to drop the last block manually
             newStack.pop();
 
+            ScopeStack mergedStack = AbstractEvaluator.mergeScopeStack(originalStack, newStack);
+
             // assign the shadow stack to the merged stack
             shadowStack = mergedStack;
+            originalStack = mergedStack;
 
             if (AbstractEvaluator.isSameStackScope(newStack, mergedStack)) {
                 break;

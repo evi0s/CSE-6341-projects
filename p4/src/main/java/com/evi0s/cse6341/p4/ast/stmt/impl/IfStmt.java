@@ -76,6 +76,12 @@ public class IfStmt extends Stmt {
         // expr.abstractEvaluate();
 
         if (elsestmt != null) {
+
+            if (elsestmt instanceof IfStmt) {
+                elsestmt.abstractEvaluate();
+                return;
+            }
+
             // need to merge
             ScopeStack shadowStackForThenStmt = ScopeStack.cloneFromExistStack(ScopeStack.getInstance());
             ScopeStack shadowStackForElseStmt = ScopeStack.cloneFromExistStack(ScopeStack.getInstance());
@@ -94,6 +100,16 @@ public class IfStmt extends Stmt {
         }
 
         // else stmt is null, no need to merge stack
-        thenstmt.abstractEvaluate();
+        ScopeStack originalStack = ScopeStack.getInstance();
+        ScopeStack shadowStack = ScopeStack.cloneFromExistStack(originalStack);
+
+        ScopeStack evaluatedShadowStack = BlockNormalizer.normalize(thenstmt).abstractEvaluateWithShadowStack(shadowStack);
+
+        // drop the last block
+        evaluatedShadowStack.pop();
+
+        // merge
+        ScopeStack mergedStack = AbstractEvaluator.mergeScopeStack(originalStack, evaluatedShadowStack);
+        ScopeStack.setInstance(mergedStack);
     }
 }
