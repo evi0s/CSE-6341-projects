@@ -1,0 +1,5 @@
+int x = readint;
+int y = 0;
+if (y == x) {
+    print x;
+}

@@ -1,0 +1,5 @@
+/* 0.5 Fail: 3 */
+int w = readint;
+int x;  
+if (w < 0) { x=1; }
+print x;

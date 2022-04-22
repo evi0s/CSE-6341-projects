@@ -1,0 +1,5 @@
+/* 0.5 AnyInt */
+int w = readint;
+int x = 5;  
+while (x < w) { x=-x; }
+print x;

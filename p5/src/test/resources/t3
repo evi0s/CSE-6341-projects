@@ -1,0 +1,7 @@
+int x = 0;
+int y = 1;
+int z = -1;
+int w = readint;
+if ((x > y) && (w > z)) {
+    print x;
+}

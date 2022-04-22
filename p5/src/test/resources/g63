@@ -1,0 +1,6 @@
+/* 0.5 Fail: 3 */
+int w = readint;
+int y = 1;
+int x;  
+while (y < w) { x=y; y=y+1; }
+print x;

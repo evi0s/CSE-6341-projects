@@ -1,0 +1,14 @@
+#!/bin/bash
+
+MYDIR=`dirname $BASH_SOURCE`
+
+pushd "$MYDIR" > /dev/null
+if [[ ! -f "build/libs/p5-1.0-SNAPSHOT.jar" ]]
+then
+    make -s
+fi
+popd > /dev/null
+
+java -XX:+UnlockExperimentalVMOptions -XX:+UseZGC -Xss128M -Xmx16G -jar build/libs/p5-1.0-SNAPSHOT.jar $*
+
+echo Process returned $?

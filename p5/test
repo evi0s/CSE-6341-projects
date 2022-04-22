@@ -1,0 +1,12 @@
+#!/bin/sh
+
+testcases=$(find ~/Downloads/p5-test/ -type f)
+
+for case in $testcases; do
+    java -jar build/libs/p5-1.0-SNAPSHOT.jar $case
+    if [ $? -eq -1 ]; then
+        echo "failed test case on $case"
+        break;
+    fi
+done;
+
