@@ -250,14 +250,7 @@ public class AbstractEvaluator {
         ScopeBlock[] array1 = s1.getScopeStack().toArray(new ScopeBlock[0]);
         ScopeBlock[] array2 = s2.getScopeStack().toArray(new ScopeBlock[0]);
 
-        int targetSize = s1.getScopeStack().size();
-        if (targetSize != 1) {
-            // drop the last block
-            targetSize -= 1;
-        }
-
-        // don't handle the last block as they will be dropped later
-        for (int i = targetSize - 1; i >= 0; i --) {
+        for (int i = s1.getScopeStack().size() - 1; i >= 0; i --) {
             // new scope block
             ScopeBlock newBlock = new ScopeBlock(array1[i].scopeTag);
 

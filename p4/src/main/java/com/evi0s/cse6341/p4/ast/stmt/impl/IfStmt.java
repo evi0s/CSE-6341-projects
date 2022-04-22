@@ -93,6 +93,9 @@ public class IfStmt extends Stmt {
             // merge
             ScopeStack mergedStack = AbstractEvaluator.mergeScopeStack(evaluatedThenShadowStack, evaluatedElseShadowStack);
 
+            // drop the last block
+            mergedStack.pop();
+
             // set instance
             ScopeStack.setInstance(mergedStack);
 
